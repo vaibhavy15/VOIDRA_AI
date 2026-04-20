@@ -1,0 +1,53 @@
+# ─── Python ───────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+
+# ─── Virtual Environment ──────────────────────────────────
+.venv/
+venv/
+env/
+
+# ─── Environment Variables (VERY IMPORTANT) ───────────────
+.env
+.env.*
+*.env
+
+# ─── Logs ────────────────────────────────────────────────
+*.log
+logs/
+
+# ─── OS Files ────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+
+# ─── IDE / Editor ────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ─── Node (if you add later) ─────────────────────────────
+node_modules/
+package-lock.json
+yarn.lock
+
+# ─── Frontend Build (if future React/Vite) ───────────────
+dist/
+build/
+
+# ─── Database / Local Files ──────────────────────────────
+*.sqlite3
+*.db
+
+# ─── Misc ───────────────────────────────────────────────
+*.bak
+*.tmp
+.env.production
+.env.local
