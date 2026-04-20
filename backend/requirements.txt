@@ -20,4 +20,4 @@ google-genai==0.3.0
 # ─── Utilities ────────────────────────────────────────────────
 python-dotenv==1.0.1
 python-multipart==0.0.9
-pydantic[email]==2.7.1
+pydantic[email]==2.6.4
