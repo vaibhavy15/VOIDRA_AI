@@ -1,6 +1,6 @@
 """
 ╔══════════════════════════════════════════════════════════════╗
-║          NEXUS DevAssist — Single-File Backend               ║
+║          VOIDRA DevAssist — Single-File Backend               ║
 ║          FastAPI + PostgreSQL + Gemini + Ollama              ║
 ╚══════════════════════════════════════════════════════════════╝
 
@@ -67,7 +67,7 @@ class Config:
     # Database
     DATABASE_URL: str = os.getenv(
         "DATABASE_URL",
-        "postgresql+asyncpg://postgres:postgres@localhost/nexus_devassist"
+        "postgresql+asyncpg://postgres:postgres@localhost/voidra_devassist"
     )
     # Auth
     SECRET_KEY:   str = os.getenv("SECRET_KEY", "change-this-in-production-please")
@@ -85,7 +85,7 @@ class Config:
 
 cfg = Config()
 logging.basicConfig(level=logging.INFO, format="%(levelname)s │ %(name)s │ %(message)s")
-log = logging.getLogger("nexus")
+log = logging.getLogger("voidra")
 
 # ══════════════════════════════════════════════════════════════
 #  DATABASE LAYER
@@ -296,7 +296,7 @@ class ChatDetail(BaseModel):
 # ══════════════════════════════════════════════════════════════
 
 SYSTEM_PROMPTS = {
-    "debug": """You are NEXUS Debugger — a specialist in identifying and fixing code errors.
+    "debug": """You are VOIDRA Debugger — a specialist in identifying and fixing code errors.
 Your ONLY job is debugging. Never add features or refactor beyond fixing bugs.
 
 For every request you MUST:
@@ -311,7 +311,7 @@ Format your response with these exact sections:
 ## FIXED CODE
 ## SUMMARY OF CHANGES""",
 
-    "upgrade": """You are NEXUS Upgrader — a specialist in code optimisation and refactoring.
+    "upgrade": """You are VOIDRA Upgrader — a specialist in code optimisation and refactoring.
 Your ONLY job is improving code quality. Never debug bugs or add new features.
 
 For every request you MUST:
@@ -326,7 +326,7 @@ Format your response with these exact sections:
 ## UPGRADED CODE
 ## IMPROVEMENTS SUMMARY""",
 
-    "generate": """You are NEXUS Generator — a specialist in writing new code from specifications.
+    "generate": """You are VOIDRA Generator — a specialist in writing new code from specifications.
 Your ONLY job is generating clean, production-ready code. Never debug or refactor existing code.
 
 For every request you MUST:
@@ -407,7 +407,7 @@ async def lifespan(app: FastAPI):
     yield
 
 app = FastAPI(
-    title="NEXUS DevAssist API",
+    title="VOIDRA DevAssist API",
     version="1.0.0",
     description="Hybrid AI developer assistant — Gemini + Ollama + PostgreSQL",
     lifespan=lifespan,
@@ -419,7 +419,7 @@ BASE_DIR = Path(__file__).resolve().parent
 
 @app.get("/")
 async def root():
-    return {"message": "Nexus AI Backend Running 🚀"}
+    return {"message": "Voidra AI Backend Running 🚀"}
 
 app.add_middleware(
     CORSMiddleware,
