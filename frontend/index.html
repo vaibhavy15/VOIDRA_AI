@@ -574,12 +574,19 @@ function setLoading(on) {
   btn.disabled = on; btn.textContent = on ? 'Running…' : 'Run →';
 }
 async function apiFetch(path, opts = {}) {
+  const headers = {
+    'Content-Type': 'application/json',
+    ...(opts.headers || {})
+  };
+
+  // 🔑 ADD TOKEN AUTOMATICALLY
+  if (state.token) {
+    headers['Authorization'] = `Bearer ${state.token}`;
+  }
+
   const res = await fetch(API + path, {
     method: opts.method || 'GET',
-    headers: {
-      'Content-Type': 'application/json',
-      ...(opts.headers || {})
-    },
+    headers,
     body: opts.body || undefined
   });
 
