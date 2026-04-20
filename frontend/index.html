@@ -556,7 +556,7 @@ import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
 import { RenderPass }     from 'three/addons/postprocessing/RenderPass.js';
 import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
 
-const API = 'https://your-backend.onrender.com';
+const API = 'https://nexus-ai-1-mc5s.onrender.com';
 const state = {
   token: localStorage.getItem('nexus_token') || null,
   user:  JSON.parse(localStorage.getItem('nexus_user') || 'null'),
@@ -573,13 +573,23 @@ function setLoading(on) {
   const btn = document.getElementById('btn-send');
   btn.disabled = on; btn.textContent = on ? 'Running…' : 'Run →';
 }
-async function apiFetch(path, opts={}) {
-  const headers = { 'Content-Type': 'application/json' };
-  if (state.token) headers['Authorization'] = `Bearer ${state.token}`;
-  const r = await fetch(API + path, { headers, ...opts });
-  if (!r.ok) { const e = await r.json().catch(()=>({detail:r.statusText})); throw new Error(e.detail||r.statusText); }
-  if (r.status === 204) return null;
-  return r.json();
+async function apiFetch(path, opts = {}) {
+  const res = await fetch(API + path, {
+    method: opts.method || 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      ...(opts.headers || {})
+    },
+    body: opts.body || undefined
+  });
+
+  const data = await res.json();
+
+  if (!res.ok) {
+    throw new Error(data.detail || 'Request failed');
+  }
+
+  return data;
 }
 function renderContent(text) {
   let html = text
