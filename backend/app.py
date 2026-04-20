@@ -417,11 +417,9 @@ from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent
 
-app.mount(
-    "/static",
-    StaticFiles(directory=str(BASE_DIR.parent / "frontend")),
-    name="static"
-)
+@app.get("/")
+async def root():
+    return {"message": "Nexus AI Backend Running 🚀"}
 
 app.add_middleware(
     CORSMiddleware,
